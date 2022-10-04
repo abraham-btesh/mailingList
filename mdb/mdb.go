@@ -69,7 +69,7 @@ func CreateEmail(db *sql.DB, email string) error {
 
 func GetEmail(db *sql.DB, email string) (*EmailEntry, error) {
 	rows, err := db.Query(`
-		SELECT is, email, confirmed_at, opt_out
+		SELECT id, email, confirmed_at, opt_out
 		FROM emails
 		WHERE email=?
 	`, email)

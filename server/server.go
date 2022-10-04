@@ -11,8 +11,8 @@ import (
 )
 
 var args struct {
-	DbPath   string `arg:"env:MAILINGLIST_DB`
-	BindJson string `arg:"env:MAILINGLIST_BIND_JSON`
+	DbPath   string `arg:"env:MAILINGLIST_DB"`
+	BindJson string `arg:"env:MAILINGLIST_BIND_JSON"`
 }
 
 func main() {

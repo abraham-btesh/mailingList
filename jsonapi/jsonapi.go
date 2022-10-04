@@ -124,7 +124,7 @@ func UpdateEmail(db *sql.DB) http.Handler {
 
 func DeleteEmail(db *sql.DB) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-		if req.Method != "POST" {
+		if req.Method != "DELETE" {
 			return
 		}
 
@@ -165,11 +165,11 @@ func GetEmailBatch(db *sql.DB) http.Handler {
 }
 
 func Serve(db *sql.DB, bind string) {
-	http.Handle("/email/create", CreateEmail(db))
+	http.Handle("/email/post", CreateEmail(db))
 	http.Handle("/email/get", GetEmail(db))
 	http.Handle("/emailget_batch", GetEmailBatch(db))
-	http.Handle("/email/update", CreateEmail(db))
-	http.Handle("/email/delete", CreateEmail(db))
+	http.Handle("/email/update", UpdateEmail(db))
+	http.Handle("/email/delete", DeleteEmail(db))
 	log.Printf("JSON API server listening on %v\n", bind)
 	err := http.ListenAndServe(bind, nil)
 
