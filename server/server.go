@@ -49,7 +49,6 @@ func main() {
 		jsonapi.Serve(db, args.BindJson)
 		wg.Done()
 	}()
-	wg.Wait()
 
 	wg.Add(1)
 	go func() {
