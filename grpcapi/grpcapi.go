@@ -36,11 +36,11 @@ func mdbEntryToPbEntry(mdbEntry *mdb.EmailEntry) pb.EmailEntry {
 	}
 }
 
-func emailResponse(db *sql.DB, email string) (*pb.emailResponse, error) {
+func emailResponse(db *sql.DB, email string) (*pb.EmailResponse, error) {
 	entry, err := mdb.GetEmail(db, email)
 
 	if err != nil {
-		return &pb.emailResponse{}, err
+		return &pb.EmailResponse{}, err
 	}
 
 	if entry == nil {
@@ -128,7 +128,7 @@ func Serve(db *sql.DB, bind string) {
 	pb.RegisterMailingListServiceServer(grpcServer, &mailServer)
 
 	log.Printf("gRPC API server listening on %v\n", bind)
-	if err != grpcServer.Serve(listener); err != nil {
+	if err := grpcServer.Serve(listener); err != nil {
 		log.Fatalf("grpc server error: %v\n", err)
 	}
 
